@@ -9,13 +9,11 @@ import { markdownToBlocks } from '@tryfabric/martian' // MarkdownをNotionのブ
  * @returns 
  */
 export function getAllNotes(updatedFileName) {
-  // Markdownファイルを格納するディレクトリ
-  const notePath = 'notes'
 
   // ファイル名を元にファイルの内容を取得
   // const notes = updatedFileName.map(name => {
     // ファイルの内容を取得
-    const content = readFileSync(path.join(notePath, updatedFileName))
+    const content = readFileSync(path.join(updatedFileName))
 
     // Markdownファイルの内容を構造データとして読み込む
     const matterResult = matter(content)
