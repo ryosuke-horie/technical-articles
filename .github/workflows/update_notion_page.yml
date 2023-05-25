@@ -30,3 +30,6 @@ jobs:
           if [[ -n "$changed_notes_files" ]]; then
             node src/index.js $changed_notes_files
           fi
+        env:
+            NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+            NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
