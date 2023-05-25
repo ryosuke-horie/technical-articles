@@ -5,15 +5,15 @@ import { markdownToBlocks } from '@tryfabric/martian' // MarkdownをNotionのブ
 
 /**
  * notesディレクトリ内のMarkdownファイルの内容をNotionのブロックに変換し、オブジェクトの配列として返す
- * @param notePath // notesディレクトリのパス 
+ * @param updatedFileName // 更新されたファイル名の配列
  * @returns 
  */
-export function getAllNotes(notePath) {
-  // notesディレクトリ内のファイル名を取得
-  const fileNames = readdirSync(notePath)
+export function getAllNotes(updatedFileName) {
+  // Markdownファイルを格納するディレクトリ
+  const notePath = 'notes'
 
   // ファイル名を元にファイルの内容を取得
-  const notes = fileNames.map(name => {
+  const notes = updatedFileName.map(name => {
     // ファイルの内容を取得
     const content = readFileSync(path.join(notePath, name))
 

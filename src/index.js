@@ -9,13 +9,20 @@ const databaseId = process.env.NOTION_DATABASE_ID
 
 /**
  * notesディレクトリ内のMarkdownファイルをNotionのデータベースに追加する
+ * 引数として更新されたファイル名を受け取る。
  */
-async function main() {
+async function main(updatedFileName) {
+  // 更新されたファイル名がない場合は処理を終了する
+  if (!updatedFileName) {
+    console.log('更新されたファイルがありません');
+    return
+  }
+
   // Notionのクライアント初期化
   const notion = new Client({ auth: token })
 
-  // notesディレクトリからノートを取得
-  const notes = getAllNotes('notes')
+  // notesディレクトリのノートを指定して取得
+  const notes = getAllNotes(updatedFileName)
 
   // 失敗したノートの名前を格納する配列
   const failedNotes = []
