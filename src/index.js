@@ -56,4 +56,5 @@ async function main(updatedFileName) {
   console.log('ページ作成に失敗したノート: ', failedNotes)
 }
 
-main()
+// ファイルが更新された場合に呼び出される。引数に更新されたファイル名が渡される
+main(process.argv[2])
