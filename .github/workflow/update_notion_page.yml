@@ -1,0 +1,32 @@
+name: Update Notion Pages
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+jobs:
+  update-notion:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Get Changed Files
+        id: files
+        uses: jitterbit/get-changed-files@v1
+
+      - name: Filter Notes and Update Notion Pages
+        run: |
+          changed_notes_files=$(echo ${{ steps.files.outputs.all }} | tr ' ' '\n' | grep '^notes/')
+          if [[ -n "$changed_notes_files" ]]; then
+            node src/index.js $changed_notes_files
+          fi
