@@ -13,19 +13,19 @@ export function getAllNotes(updatedFileName) {
   const notePath = 'notes'
 
   // ファイル名を元にファイルの内容を取得
-  const notes = updatedFileName.map(name => {
+  // const notes = updatedFileName.map(name => {
     // ファイルの内容を取得
-    const content = readFileSync(path.join(notePath, name))
+    const content = readFileSync(path.join(notePath, updatedFileName))
 
     // Markdownファイルの内容を構造データとして読み込む
     const matterResult = matter(content)
 
     // ファイル名とファイルの内容を返す。
     return {
-      name: name.replace(/.md$/, ''),               // ファイル名をデータベースに登録するタイトル（Name）として使用する
+      name: updatedFileName.replace(/.md$/, ''),               // ファイル名をデータベースに登録するタイトル（Name）として使用する
       body: markdownToBlocks(matterResult.content), // MarkdownをNotionのブロックに変換する
     }
-  })
+  // })
 
-  return notes
+  // return notes
 }
