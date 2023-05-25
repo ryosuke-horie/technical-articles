@@ -23,13 +23,12 @@ async function main(updatedFileName) {
   const notion = new Client({ auth: token })
 
   // notesディレクトリのノートを指定して取得
-  const notes = getAllNotes(updatedFileName)
+  const note = getAllNotes(updatedFileName)
 
   // 失敗したノートの名前を格納する配列
   const failedNotes = []
 
   // ノートを再帰的にNotionデータベースに追加
-  for (const note of notes) {
     try {
       await notion.pages.create({
         parent: { database_id: databaseId },
@@ -49,7 +48,7 @@ async function main(updatedFileName) {
       console.error(`${note.name}の追加に失敗: `, e)
       failedNotes.push(note.name)
     }
-  }
+  
 
   // 失敗したノートの名前をログに出力
   // 失敗しなかったら[]が出力される
