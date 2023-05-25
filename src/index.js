@@ -17,6 +17,7 @@ async function main(updatedFileName) {
     console.log('更新されたファイルがありません');
     return
   }
+  console.log('更新されたファイル: ', updatedFileName)
 
   // Notionのクライアント初期化
   const notion = new Client({ auth: token })
