@@ -1,15 +1,13 @@
 import { Client } from '@notionhq/client'   // Notionのクライアント
 import { getAllNotes } from './markdown.js' // notesディレクトリからMarkdownをNotionの形式に変換する関数
-import dotenv from 'dotenv'
 
-// 環境変数からNotionのトークンとデータベースIDを取得
-dotenv.config()
 const token = process.env.NOTION_TOKEN
 const databaseId = process.env.NOTION_DATABASE_ID
 
 /**
  * notesディレクトリ内のMarkdownファイルをNotionのデータベースに追加する
  * 引数として更新されたファイル名を受け取る。
+ * @param {string} updatedFileName 更新されたファイル名
  */
 async function main(updatedFileName) {
   // 更新されたファイル名がない場合は処理を終了する
@@ -26,7 +24,7 @@ async function main(updatedFileName) {
   const note = getAllNotes(updatedFileName)
 
   // 失敗したノートの名前を格納する配列
-  const failedNotes = []
+  const failedNotes = ''
 
   // ノートを再帰的にNotionデータベースに追加
     try {
@@ -51,7 +49,6 @@ async function main(updatedFileName) {
   
 
   // 失敗したノートの名前をログに出力
-  // 失敗しなかったら[]が出力される
   console.log('ページ作成に失敗したノート: ', failedNotes)
 }
 

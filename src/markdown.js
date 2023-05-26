@@ -9,9 +9,6 @@ import { markdownToBlocks } from '@tryfabric/martian' // MarkdownをNotionのブ
  * @returns 
  */
 export function getAllNotes(updatedFileName) {
-
-  // ファイル名を元にファイルの内容を取得
-  // const notes = updatedFileName.map(name => {
     // ファイルの内容を取得
     const content = readFileSync(path.join(updatedFileName))
 
@@ -23,7 +20,4 @@ export function getAllNotes(updatedFileName) {
       name: updatedFileName.replace(/.md$/, ''),               // ファイル名をデータベースに登録するタイトル（Name）として使用する
       body: markdownToBlocks(matterResult.content), // MarkdownをNotionのブロックに変換する
     }
-  // })
-
-  // return notes
 }
